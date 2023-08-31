@@ -1,0 +1,573 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.image-container {
+  position: absolute;
+  width: 720px;
+  height: 600px;
+}
+.image-class {
+  position: absolute;
+  object-fit: cover;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  clip-path: polygon(99% 10%, 51% 37%, 4% 29%, 4% 72%, 51% 100%, 99% 64%);
+}
+
+.image-class1 {
+  clip-path: polygon(0 44%, 0 100%, 55% 100%);
+  position: relative;
+  top: 7px;
+  width: 60vw;
+  height: 90vh;
+}
+
+.image-class2 {
+  clip-path: polygon(51% 85%, 96% 61%, 80% 100%, 23% 100%, 8% 63%);
+  object-fit: cover;
+
+  z-index: 10;
+}
+
+.image-class3 {
+  clip-path: polygon(100% 37%, 62% 100%, 100% 100%);
+  position: relative;
+  top: 10px;
+  right: 94.5rem;
+  width: 61vw;
+  height: 90vh;
+}
+
+.circle-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.circle-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: url("./Assests/Circle.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.circle-overlay {
+  position: absolute;
+  top: 100px;
+  left: 140px;
+  width: 385px;
+  height: 385px;
+  border-radius: 50%;
+  box-shadow: 0 0 0px blue;
+}
+
+.circleclass {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: blue;
+  position: relative;
+  top: 30px;
+  left: 120px;
+}
+.text-class {
+  --max-lines: 15;
+  --line-height: 1.5;
+  max-height: calc(var(--max-lines) * 1em * var(--line-height));
+  line-height: var(--line-height);
+  color: white;
+  overflow: hidden;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.bg-divided-image {
+  background-image: url("./Assests/contactBackground.jpg"); /* Replace with your image path */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.form-box {
+  position: relative;
+  width: 400px;
+  height: 450px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h2-class {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.inputbox {
+  position: relative;
+  margin: 30px 0;
+  width: 310px;
+  border-bottom: 2px solid #fff;
+}
+.inputbox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 1em;
+  pointer-events: none;
+  transition: 0.5s;
+}
+input:focus ~ label,
+input:valid ~ label {
+  top: -5px;
+}
+.inputbox input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+
+.button-class {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 22%);
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.item {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.MenuBtn {
+  background-color: #ff9900;
+  margin: 0;
+  padding: 0;
+  color: "#202020";
+  width: 15rem;
+  height: 3rem;
+  border: none;
+  outline: none;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+
+  font-size: "1em";
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  position: absolute;
+  padding: 4rem;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.item {
+  width: 100%;
+  height: calc(
+    50vh / 3
+  ); /* Divide the container height by the number of bars */
+  background-color: green;
+}
+
+.carousel-container {
+  position: relative;
+  height: 100px;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+}
+
+.carousel-item {
+  flex: 0 0 100vw;
+  height: 100%;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.next,
+.prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.next {
+  right: 1rem;
+}
+
+.prev {
+  left: 1rem;
+}
+
+.container5 {
+  display: grid;
+  grid-template-columns: repeat(5, 22%);
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.item5 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.app-bg {
+  background: linear-gradient(#03051a, #361b34);
+}
+.carousel-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.text-container {
+  width: 25rem;
+  position: relative;
+  overflow: hidden;
+  height: 10rem;
+  margin: 1rem 0 1rem -2rem;
+}
+
+video {
+  position: absolute;
+  top: 0;
+  width: 24rem;
+  height: 10rem;
+}
+
+svg {
+  position: absolute;
+  top: -1rem;
+  left: -0.75rem;
+  width: 27rem;
+}
+
+.body {
+  position: absolute;
+  top: 50%;
+  margin-left: -50px;
+  left: 50%;
+  animation: speeder 0.4s linear infinite;
+
+  > span {
+    height: 5px;
+    width: 35px;
+    background: #000;
+    position: absolute;
+    top: -19px;
+    left: 60px;
+    border-radius: 2px 10px 1px 0;
+  }
+}
+.base span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-right: 100px solid #000;
+  border-bottom: 6px solid transparent;
+}
+
+.base span:before {
+  content: "";
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+  right: -110px;
+  top: -16px;
+}
+
+.base span:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-right: 55px solid #000;
+  border-bottom: 16px solid transparent;
+  top: -16px;
+  right: -98px;
+}
+
+.face {
+  position: absolute;
+  height: 12px;
+  width: 20px;
+  background: #000;
+  border-radius: 20px 20px 0 0;
+  transform: rotate(-40deg);
+  right: -125px;
+  top: -15px;
+
+  &:after {
+    content: "";
+    height: 12px;
+    width: 12px;
+    background: #000;
+    right: 4px;
+    top: 7px;
+    position: absolute;
+    transform: rotate(40deg);
+    transform-origin: 50% 50%;
+    border-radius: 0 0 0 2px;
+  }
+}
+
+.body > span > span:nth-child(1),
+.body > span > span:nth-child(2),
+.body > span > span:nth-child(3),
+.body > span > span:nth-child(4) {
+  width: 30px;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  animation: fazer1 0.2s linear infinite;
+}
+.body > span > span:nth-child(2) {
+  top: 3px;
+  animation: fazer2 0.4s linear infinite;
+}
+
+.body > span > span:nth-child(3) {
+  top: 1px;
+  animation: fazer3 0.4s linear infinite;
+  animation-delay: -1s;
+}
+
+.body > span > span:nth-child(4) {
+  top: 4px;
+  animation: fazer4 1s linear infinite;
+  animation-delay: -1s;
+}
+@keyframes fazer1 {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -80px;
+    opacity: 0;
+  }
+}
+
+@keyframes fazer2 {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -100px;
+    opacity: 0;
+  }
+}
+
+@keyframes fazer3 {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -50px;
+    opacity: 0;
+  }
+}
+
+@keyframes fazer4 {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150px;
+    opacity: 0;
+  }
+}
+
+@keyframes speeder {
+  0% {
+    transform: translate(2px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -3px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-2px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 3px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-1px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-2px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(2px, 1px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+.longfazers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.longfazers span {
+  position: absolute;
+  height: 2px;
+  width: 20%;
+  background: #000;
+}
+
+.longfazers span:nth-child(1) {
+  top: 20%;
+  animation: lf 0.6s linear infinite;
+  animation-delay: -5s;
+}
+
+.longfazers span:nth-child(2) {
+  top: 40%;
+  animation: lf2 0.8s linear infinite;
+  animation-delay: -1s;
+}
+
+.longfazers span:nth-child(3) {
+  top: 60%;
+  animation: lf3 0.6s linear infinite;
+}
+
+.longfazers span:nth-child(4) {
+  top: 80%;
+  animation: lf4 0.5s linear infinite;
+  animation-delay: -3s;
+}
+@keyframes lf {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+@keyframes lf2 {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+@keyframes lf3 {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -100%;
+    opacity: 0;
+  }
+}
+@keyframes lf4 {
+  0% {
+    left: 200%;
+  }
+  100% {
+    left: -100%;
+    opacity: 0;
+  }
+}
