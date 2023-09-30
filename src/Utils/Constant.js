@@ -125,6 +125,6 @@ export const navIcons = [
     id: 3,
     name: "linkedin",
     icon: linkedin,
-    link: "https://www.linkedin.com/in/muhammad-ali-a96a7a251/",
+    link: "https://www.linkedin.com/in/muhammad-ali-890954293/",
   },
 ];
