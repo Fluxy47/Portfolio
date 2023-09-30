@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Home from "./Pages/Home";
-import { first, throttle } from "lodash";
+import { throttle } from "lodash";
 import Projects from "./Pages/Projects";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -223,36 +223,8 @@ function App() {
       clearTimeout(loadingTimeout);
     };
   }, [isLoading]);
-  // const cursorRef = useRef(null);
-
-  // const animateCursor = (e, interacting) => {
-  //   const x = e.clientX - cursorRef.current.offsetWidth / 2;
-  //   const y = e.clientY - cursorRef.current.offsetHeight / 2;
-
-  //   const keyframes = {
-  //     transform: `translate(${x}px, ${y}px) scale(${interacting ? 8 : 1})`,
-  //   };
-
-  //   cursorRef.current.animate(keyframes, {
-  //     duration: 800,
-  //     fill: "forwards",
-  //   });
-  // };
-
-  // const handleMouseMove = (e) => {
-  //   const interactable = e.target.closest(".interactable");
-  //   const interacting = interactable !== null;
-
-  //   animateCursor(e, interacting);
-  // };
-
   return (
-    <div
-      className=" h-screen  overflow-hidden"
-      onWheel={handleWheel}
-      // onMouseMove={handleMouseMove}
-    >
-      {/* <div className="cursor-style" ref={cursorRef} /> */}
+    <div className=" h-screen  overflow-hidden" onWheel={handleWheel}>
       <Cursor />
       <AnimatePresence mode="wait">{isLoading && <Loader />}</AnimatePresence>
       <div id="your-container-class" className="your-container-class">
@@ -284,11 +256,6 @@ function App() {
           visitedFragments={visitedFragments.includes("Contact-Me")}
         />
       </div>
-      {/*
-      <Testing
-        currentFragment={currentFragment}
-        visitedFragments={visitedFragments.includes("Testing")}
-      /> */}
     </div>
   );
 }

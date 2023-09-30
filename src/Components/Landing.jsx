@@ -14,7 +14,7 @@ function Landing({ finalY, shouldAnimate }) {
       }}
       transition={{ duration: 1, delay: 1.5 }}
     >
-      <motion.img
+      {/* <motion.img
         initial={{ y: 20, x: 50, opacity: 0 }}
         animate={{
           opacity: shouldAnimate ? 1 : 0,
@@ -24,7 +24,7 @@ function Landing({ finalY, shouldAnimate }) {
         transition={{ duration: 0.3, delay: 3 }}
         src={man7}
         className="hidden lg:inline absolute right-0  w-[50vw] h-screen pointer-events-none"
-      />
+      /> */}
       <motion.section
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: shouldAnimate ? 1 : 0, x: shouldAnimate ? 0 : -50 }}
