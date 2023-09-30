@@ -28,7 +28,7 @@ function ContactMe({ shouldAnimate, finalY }) {
 
   return (
     <motion.div
-      className="h-screen contact-container "
+      className="h-screen contact-container w-[90vw] md:w-full"
       style={{
         position: "relative",
         zIndex: shouldAnimate ? 10 : 1,

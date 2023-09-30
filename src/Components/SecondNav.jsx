@@ -52,8 +52,8 @@ const SecondNav = ({ handleNavigation }) => {
           ))}
         </motion.section>
       </section>
-      <div className="absolute top-0 left-0  h-screen w-full flex flex-col lg:flex-row-reverse justify-evenly   ">
-        <div className="lg:absolute w-full  lg:w-auto h-auto mt-[5%] lg:mt-0 top-[5%] lg:top-[15%] right-0 lg:right-[15%] flex  items-center justify-center  ">
+      <div className="absolute top-0 left-0  h-screen w-full flex flex-col lg:flex-row-reverse justify-evenly ">
+        <div className="lg:absolute w-full  lg:w-auto h-[60vh] mt-[10vh]  lg:mt-0  lg:top-[15%] right-0 lg:right-[15%] flex  items-center justify-center  ">
           <motion.div className="flex flex-col  " variants={container2}>
             <motion.h1
               className="text-[#06061C]  text-[2.5em] md:text-[4em] lg:text-[2.5em]  font-semibold pb-[20px] lg:pb-[40px] tracking-[0.2rem] md:tracking-[0.5rem] mt-6 mx-6 "
@@ -77,7 +77,7 @@ const SecondNav = ({ handleNavigation }) => {
           </motion.div>
         </div>
 
-        <section className="relative lg:absolute lg:top-0 left-0 lg:left-[10%] flex flex-col  w-full lg:w-auto lg:h-screen justify-evenly items-center  ">
+        <section className="relative lg:absolute lg:top-0 left-0 lg:left-[10%] flex flex-col  w-full lg:w-auto h-[30vh] lg:h-screen justify-evenly items-center">
           <motion.div
             className="flex flex-col items-center justify-evenly relative top-[-20px]"
             variants={navAnimation}

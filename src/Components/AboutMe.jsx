@@ -44,9 +44,9 @@ function AboutMe({ shouldAnimate, finalY }) {
           animate={{ opacity: shouldAnimate ? 1 : 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
-          className="flex flex-col mt-[-35px] md:mt-0 z-[60] justify-center w-full md:w-[80vw] lg:w-[50vw] h-screen absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  "
+          className="flex flex-col  z-[60]  w-full md:w-[80vw] lg:w-[50vw] h-[90vh] mt-[10vh] md:mt-[15vh]  absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  "
         >
-          <h1 className="text-3xl neon-text md:text-7xl lg:text-6xl z-[60] text-white text-center ">
+          <h1 className="text-3xl neon-text md:text-7xl lg:text-6xl z-[60]  text-white text-center mt-[20px] md:mt-0">
             Choosing to not choose is equally important too{""}
           </h1>
           <p className="mt-10 mb-7 mx-5 text-white text-lg md:text-3xl lg:text-lg ">

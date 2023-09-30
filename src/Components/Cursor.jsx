@@ -149,8 +149,12 @@ function Cursor() {
 
   return (
     <>
-      <div ref={cursorDotOutline} id="cursor-dot-outline" />
-      <div ref={cursorDot} id="cursor-dot" />
+      <div
+        ref={cursorDotOutline}
+        id="cursor-dot-outline"
+        className="hidden lg:inline"
+      />
+      <div ref={cursorDot} id="cursor-dot" className="hidden lg:inline" />
     </>
   );
 }
