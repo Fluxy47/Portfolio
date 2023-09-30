@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import Typed from "typed.js";
-import WorkImage from "../Assests/svg/work.svg";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import AboutMe from "../Components/AboutMe";
 
 function About({ currentFragment, visitedFragments }) {
@@ -15,6 +14,7 @@ function About({ currentFragment, visitedFragments }) {
     }
   }, [currentFragment]);
   const finalY = shouldAnimate ? "-200%" : visitedFragments ? "-700%" : 0;
+  const finalX = shouldAnimate ? 0 : visitedFragments ? "200vw" : "-100vw";
 
   const customDelays = [
     { num: 1, delay: 0.3 },
@@ -24,8 +24,6 @@ function About({ currentFragment, visitedFragments }) {
     { num: 5, delay: 1.5 },
   ];
 
-  const finalO = shouldAnimate ? 1 : 0;
-
   return (
     <motion.div
       className="h-screen w-screen  "
@@ -34,25 +32,30 @@ function About({ currentFragment, visitedFragments }) {
         zIndex: shouldAnimate ? 10 : 1,
       }}
     >
-      <motion.section className="flex  w-full h-screen ">
+      <motion.section className="flex flex-col  w-full h-screen ">
         {customDelays.map((item, index) => (
           <motion.div
-            className="w-[20vw] h-screen  bg-[#311931] border-none "
+            className="w-full h-[20vh] bg-black border-none "
             key={index}
-            initial={{ y: 0 }}
-            animate={{ y: finalY }}
-            transition={{ delay: item.delay, ease: [0.6, 0.01, -0.05, 0.95] }} // Pass delay value as custom prop
+            initial={{ x: "-100vw", y: "-200vh" }}
+            animate={{ x: finalX }}
+            transition={{
+              delay: shouldAnimate ? item.delay : 2,
+              ease: [0.6, 0.01, -0.05, 0.95],
+            }} // Pass delay value as custom prop
           />
         ))}
       </motion.section>
-      <motion.div
-        className="absolute top-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: finalO }}
-        transition={{ delay: shouldAnimate ? 2.5 : 0 }}
-      >
-        <AboutMe shouldAnimate={shouldAnimate} finalY={finalY} />
-      </motion.div>
+      <AnimatePresence>
+        <motion.div
+          className="absolute top-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: shouldAnimate && 1 }}
+          transition={{ delay: shouldAnimate ? 2.5 : 0 }}
+        >
+          <AboutMe shouldAnimate={shouldAnimate} finalY={finalY} />
+        </motion.div>
+      </AnimatePresence>
     </motion.div>
   );
 }

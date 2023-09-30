@@ -1,15 +1,11 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { myProjects } from "../Utils/Constant";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import Card from "../Components/Card";
-import Modal from "../Components/Modal";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+
 import Project from "../Components/Project";
 
 function Projects({ currentFragment, visitedFragments }) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
-  const [finalY, setFinalY] = useState(0);
+  const [finalX, setFinalX] = useState(0);
 
   useEffect(() => {
     if (currentFragment === "Projects") {
@@ -21,15 +17,17 @@ function Projects({ currentFragment, visitedFragments }) {
 
   useEffect(() => {
     if (shouldAnimate) {
-      setFinalY("-100%");
+      setFinalX(0);
     } else if (!shouldAnimate && visitedFragments) {
       setTimeout(() => {
-        setFinalY("-500%");
+        setFinalX("-200vw");
       }, 800);
     } else {
-      setFinalY("0");
+      setFinalX("100vw");
     }
   }, [shouldAnimate, visitedFragments]);
+
+  const finalY = shouldAnimate ? "-100%" : visitedFragments ? "-500%" : 0;
 
   const customDelays = [
     { num: 1, delay: 0.3 },
@@ -48,14 +46,17 @@ function Projects({ currentFragment, visitedFragments }) {
         zIndex: shouldAnimate ? 10 : 1,
       }}
     >
-      <motion.section className="flex  w-full h-screen ">
+      <motion.section className="flex flex-col w-full h-screen ">
         {customDelays.map((item, index) => (
           <motion.div
-            className="w-[20vw] h-screen  bg-[black] border-y-2 border-white  "
+            className="w-full h-[20vh] bg-gradient-to-l from-[#361b34] to-[#03051a]    "
             key={index}
-            initial={{ y: 0 }}
-            animate={{ y: finalY }}
-            transition={{ delay: item.delay, ease: [0.6, 0.01, -0.05, 0.95] }} // Pass delay value as custom prop
+            initial={{ x: "100vw", y: "-100vh" }}
+            animate={{ x: finalX }}
+            transition={{
+              delay: shouldAnimate ? item.delay : 2,
+              ease: [0.6, 0.01, -0.05, 0.95],
+            }} // Pass delay value as custom prop
           />
         ))}
       </motion.section>

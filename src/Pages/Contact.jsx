@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+
 import { motion } from "framer-motion";
 import ContactMe from "../Components/ContactMe";
 import contactBackground from "../Assests/contactBackground.jpg";
@@ -16,13 +16,12 @@ function Contact({ currentFragment, visitedFragments }) {
   }, [currentFragment]);
 
   const finalY = shouldAnimate ? "-300%" : visitedFragments ? "-800%" : 0;
-
   const customDelays = [
-    { num: 1, delay: 0.3 },
-    { num: 2, delay: 0.6 },
-    { num: 3, delay: 0.9 },
-    { num: 4, delay: 1.2 },
-    { num: 5, delay: 1.5 },
+    { num: 1, delay: 0.6 },
+    { num: 2, delay: 0.9 },
+    { num: 3, delay: 1.2 },
+    { num: 4, delay: 1.5 },
+    { num: 5, delay: 1.8 },
   ];
 
   const finalO = shouldAnimate ? 1 : 0;
@@ -48,7 +47,10 @@ function Contact({ currentFragment, visitedFragments }) {
             key={index}
             initial={{ y: 0 }}
             animate={{ y: finalY }}
-            transition={{ delay: item.delay, ease: [0.6, 0.01, -0.05, 0.95] }} // Pass delay value as custom prop
+            transition={{
+              delay: shouldAnimate ? item.delay : 2,
+              ease: [0.6, 0.01, -0.05, 0.95],
+            }} // Pass delay value as custom prop
           />
         ))}
       </motion.section>

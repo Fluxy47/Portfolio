@@ -1,16 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BlueMoon from "../Assests/BlueMoon.jpg";
-import Wild from "../Assests/Wild.jpg";
-import Last from "../Assests/Last.jpg";
-import Lo1 from "../Assests/Lo1.png";
-import man7 from "../Assests/man7.webp";
-import Lo2 from "../Assests/Lo2.jpg";
-import Lo3 from "../Assests/Lo3.jpg";
-import Lo4 from "../Assests/Lo4.jpg";
-import Lo5 from "../Assests/Lo5.jpg";
-import Lo6 from "../Assests/Lo6.jpg";
-import contactBackground from "../Assests/contactBackground.jpg";
-import ChasingDream from "../Assests/ChasingDream.png";
 
 import { motion } from "framer-motion";
 import Landing from "../Components/Landing";
@@ -33,13 +21,12 @@ function Home({ currentFragment, visitedFragments }) {
     { num: 4, delay: 1.2 },
     { num: 5, delay: 1.5 },
   ];
-
-  const finalY = shouldAnimate ? 0 : visitedFragments ? "-260%" : 0;
+  const finalY = shouldAnimate ? 0 : visitedFragments ? "-700%" : 0;
   const finalO = shouldAnimate ? 1 : 0;
 
   return (
     <motion.div
-      className="h-screen app-bg overflow-hidden "
+      className=" relative  h-full w-full  "
       style={{
         zIndex: shouldAnimate ? 10 : 1,
       }}
@@ -47,16 +34,19 @@ function Home({ currentFragment, visitedFragments }) {
       <motion.section className="flex  w-full h-screen ">
         {customDelays.map((item, index) => (
           <motion.div
-            className="w-[20vw] h-screen  app-bg border-none "
+            className="w-[20vw] h-screen bg-black  "
             key={index}
             initial={{ y: 0 }}
             animate={{ y: finalY }}
-            transition={{ delay: item.delay, ease: [0.6, 0.01, -0.05, 0.95] }} // Pass delay value as custom prop
+            transition={{
+              delay: shouldAnimate ? item.delay : 2,
+              ease: [0.6, 0.01, -0.05, 0.95],
+            }} // Pass delay value as custom prop
           />
         ))}
       </motion.section>
       <motion.div
-        className="absolute top-0"
+        className="absolute top-0 "
         initial={{ opacity: 0 }}
         animate={{ opacity: finalO }}
         transition={{ delay: shouldAnimate ? 2.5 : 0 }}

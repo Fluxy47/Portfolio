@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from "react";
-import BlueMoon from "../Assests/BlueMoon.jpg";
-import Wild from "../Assests/Wild.jpg";
-import Last from "../Assests/Last.jpg";
-import Lo1 from "../Assests/Lo1.png";
-import man7 from "../Assests/man7.webp";
-import Lo2 from "../Assests/Lo2.jpg";
-import Lo3 from "../Assests/Lo3.jpg";
-import Lo4 from "../Assests/Lo4.jpg";
-import Lo5 from "../Assests/Lo5.jpg";
-import Lo6 from "../Assests/Lo6.jpg";
-import contactBackground from "../Assests/contactBackground.jpg";
-import ChasingDream from "../Assests/ChasingDream.png";
-import Banner from "../Assests/Banner.jpg";
+import man7 from "../Assests/man7.png";
 import { motion } from "framer-motion";
 
 function Landing({ finalY, shouldAnimate }) {
   return (
     <motion.div
-      className=" relative  h-screen w-screen  "
+      className=" relative  h-screen w-screen  overflow-hidden"
       style={{
         zIndex: shouldAnimate ? 10 : 1,
       }}
@@ -27,41 +14,50 @@ function Landing({ finalY, shouldAnimate }) {
       }}
       transition={{ duration: 1, delay: 1.5 }}
     >
-      <img
+      <motion.img
+        initial={{ y: 20, x: 50, opacity: 0 }}
+        animate={{
+          opacity: shouldAnimate ? 1 : 0,
+          y: shouldAnimate ? 0 : 20,
+          x: shouldAnimate ? 0 : 50,
+        }}
+        transition={{ duration: 0.3, delay: 3 }}
         src={man7}
-        className="image-class w-full h-[70vh] md:h-[80vh] lg:w-[720px] lg:h-[600px]"
+        className="hidden lg:inline absolute right-0  w-[50vw] h-screen pointer-events-none"
       />
-
-      <img
-        src={ChasingDream}
-        alt="boom2"
-        className="image-class2 absolute bottom-0 left-1/2 -translate-x-1/2 clipped-image"
-      />
+      <motion.section
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: shouldAnimate ? 1 : 0, x: shouldAnimate ? 0 : -50 }}
+        transition={{ duration: 0.3, delay: 3 }}
+        className="flex flex-col  h-screen w-full lg:w-[50vw]  justify-center "
+      >
+        <h1 className="text-5xl  text-white md:text-8xl lg:text-7xl font-playfair z-10 lg:ml-16 text-center">
+          Muhammad{" "}
+          <span
+            className="md:ml-8 relative lg:text-[#010026] font-semibold z-20 md:before:content-brush
+              before:absolute   before:-left-[60px] before:-top-[65px] lg:before:-top-[70px] before:z-[-1]"
+          >
+            Ali
+          </span>
+        </h1>
+        <p className="mt-10 mb-7 mx-3 lg:mx-6 text-white text-lg text-center ">
+          {" "}
+          I'm a front-end{" "}
+          <span className="text-[#C45FB5] font-bold">Developer</span> with a
+          passion for Unveiling Digital Dreams with Code & Creativity, weaving
+          magic to bring digital dreams to life.
+        </p>
+        <div className="flex  items-center justify-center gap-5">
+          <div className="btn ">
+            <a href="#Projects">Projects</a>
+          </div>
+          <div className="btn ">
+            <a href="#Contact-Me">ContactMe</a>
+          </div>
+        </div>
+      </motion.section>
     </motion.div>
   );
 }
 
 export default Landing;
-
-{
-  /* <div className="image-container">
-        <div className="relative top-[18rem] left-[35rem] w-[255px] h-[80px] border-2 border-solid z-[15] bg-transparent">
-          <h1 className="relative right-10 whitespace-nowrap text-white bg-transparent text-[3em] leading-wider">
-            Muhammad Ali
-          </h1>
-        </div>
-        <motion.img
-          src={man7}
-          alt="landingPic"
-          className="image-class"
-          // initial={{ scale: 4 }} 
-          // animate={{ scale: 1, x: [0, 200, 0] }}
-          transition={{ duration: 0.5, ease: "easeInOut", delay: 1 }}
-        />
-      </div>
-      <div className="relative flex top-[55px]">
-        <img src={Lo3} alt="boom1" className="image-class1 " />
-        <img src={ChasingDream} alt="boom2" className="image-class2" />
-        <img src={Lo3} alt="boom3" className="image-class3" />
-      </div> */
-}

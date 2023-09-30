@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 
@@ -28,7 +28,7 @@ function ContactMe({ shouldAnimate, finalY }) {
 
   return (
     <motion.div
-      className="h-screen contact-container"
+      className="h-screen contact-container "
       style={{
         position: "relative",
         zIndex: shouldAnimate ? 10 : 1,
@@ -39,12 +39,7 @@ function ContactMe({ shouldAnimate, finalY }) {
       }}
       transition={{ duration: 1, delay: 1.5 }}
     >
-      <motion.div
-        className="form-box"
-        initial={{ backdropFilter: 0 }}
-        animate={{ backdropFilter: "blur(15px)" }}
-        transition={{ duration: 1, delay: 4 }}
-      >
+      <div className="form-box">
         <div className="form-value">
           <form ref={form} onSubmit={sendEmail}>
             <h2 className="h2-class">Contact Me</h2>
@@ -63,11 +58,18 @@ function ContactMe({ shouldAnimate, finalY }) {
               <input type="text" required name="message" />
               <label>Message</label>
             </div>
-            <button className="button-class">Submit</button>
+            <a>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className="button-class"
+              >
+                Submit
+              </motion.button>
+            </a>
             <div className="register"></div>
           </form>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

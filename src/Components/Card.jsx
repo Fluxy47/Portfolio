@@ -1,56 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import AnimatedText from "./AnimatedText";
 
-function Card({
-  item,
-  setSelected,
-  SelectedFunc,
-  SelectedFunc2,
-  isButtonClicked,
-  willAnimate,
-  isShow,
-}) {
-  const handleClick = (item) => {
-    if (isButtonClicked === false) {
-      SelectedFunc(item);
-    } else {
-      SelectedFunc2();
-    }
-  };
-
+function Card({ item, index, willAnimate, handleClick }) {
   return (
-    <motion.div
-      className=" w-full lg:w-[430px]  h-[300px] relative bg-slate-800 "
-      layout
-      animate={{ height: willAnimate ? "400px" : "300px" }}
+    <div
+      onClick={() => handleClick(index)}
+      className={`w-[80vw] h-[50vh] lg:w-[430px] card ${
+        index === willAnimate ? "active" : ""
+      }`}
     >
-      <img
-        src=""
-        alt="project-pic"
-        className="object-cover h-[200px] w-[429px]"
-      />
-      <h1 className="text-white bg-slate-900 text-[1.6em] pb-[10px] pl-[120px]">
-        {item?.title}
-      </h1>
-      <AnimatePresence mode="wait">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isShow ? 1 : 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="text-[1.1em] text-center   text-white"
+      {willAnimate != null && (
+        <>
+          <div className="card-title">
+            <AnimatedText
+              text={item.title}
+              myclass={`card-subtitle-word ${
+                willAnimate === index ? "active" : ""
+              }`}
+            />
+          </div>
+          <div className="card-subtitle">
+            <AnimatedText
+              text={item.description}
+              myclass={`card-subtitle-word ${
+                willAnimate === index ? "active" : ""
+              }`}
+            />
+          </div>
+        </>
+      )}
+      {willAnimate === index && (
+        <motion.button
+          className={
+            willAnimate === index ? "active btn2 fourth" : "btn2 fourth"
+          }
         >
-          this project is about youtube with lots of animation and i wanted to
-          see if it was possible
-        </motion.p>
-      </AnimatePresence>
-      <motion.button
-        className="bg-red-500 w-[130px] h-[50px] absolute bottom-0 left-1/2 -translate-x-1/2 "
-        onClick={() => handleClick(item)}
-      >
-        {/* {isButtonClicked ? "Close Project" : "View Project"} */}
-      </motion.button>
-    </motion.div>
+          View Project
+        </motion.button>
+      )}
+      <div className="flex absolute bottom-0 w-full z-[2]  items-center justify-center ">
+        <a href={item.link} target="_blank" rel="noreferrer">
+          <motion.button className="btn2 fourth">View Project</motion.button>
+        </a>
+      </div>
+    </div>
   );
 }
 

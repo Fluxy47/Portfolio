@@ -7,8 +7,8 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import NavBar from "./Components/NavBar";
 import SecondNav from "./Components/SecondNav";
-import Testing from "./Components/Testing";
 import Loader from "./Components/Loader";
+import Cursor from "./Components/Cursor";
 
 function App() {
   const [currentFragment, setCurrentFragment] = useState("");
@@ -17,8 +17,13 @@ function App() {
   const [visitedFragments, setVisitedFragments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ButtonClicked, setButtonClicked] = useState(false);
-  console.log("visited", visitedFragments);
   const [navAnimate, setNavAnimate] = useState(false);
+
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.location.hash = "Home";
+    }
+  }, []);
 
   const handleNavigation = (page) => {
     const currentIndex = fragments.indexOf(page);
@@ -35,7 +40,7 @@ function App() {
     setCurrentFragment(page);
     setTimeout(() => {
       setNavAnimate(false);
-    }, 1000);
+    }, 1500);
   };
 
   const shouldNotAnimate = () => {
@@ -56,8 +61,7 @@ function App() {
 
   const handleWheel = throttle(
     (event) => {
-      if (navAnimate) return;
-      if (processingScroll) return;
+      if (navAnimate || processingScroll) return;
       setProcessingScroll(true);
 
       if (!renderingInProgress) {
@@ -69,7 +73,10 @@ function App() {
         } else if (event.touches) {
           // Touch event
           const touchEndY = event.touches[0].clientY;
-          scrollDirection = touchEndY > touchStartY ? "down" : "up";
+          const touchDirection = touchEndY > touchStartY ? "down" : "up";
+          if (Math.abs(touchEndY - touchStartY) > 50) {
+            scrollDirection = touchDirection;
+          }
         } else if (event.key) {
           // Keyboard event
           if (event.key === "ArrowUp") {
@@ -111,6 +118,15 @@ function App() {
   window.addEventListener("touchstart", function (event) {
     touchStartY = event.touches[0].clientY;
   });
+
+  // Add an event listener to track touch move
+  window.addEventListener(
+    "touchmove",
+    function (event) {
+      event.preventDefault(); // Prevent default touch behavior
+    },
+    { passive: false }
+  );
 
   // Add an event listener to track keyboard input
   window.addEventListener("keydown", function (event) {
@@ -207,37 +223,67 @@ function App() {
       clearTimeout(loadingTimeout);
     };
   }, [isLoading]);
+  // const cursorRef = useRef(null);
+
+  // const animateCursor = (e, interacting) => {
+  //   const x = e.clientX - cursorRef.current.offsetWidth / 2;
+  //   const y = e.clientY - cursorRef.current.offsetHeight / 2;
+
+  //   const keyframes = {
+  //     transform: `translate(${x}px, ${y}px) scale(${interacting ? 8 : 1})`,
+  //   };
+
+  //   cursorRef.current.animate(keyframes, {
+  //     duration: 800,
+  //     fill: "forwards",
+  //   });
+  // };
+
+  // const handleMouseMove = (e) => {
+  //   const interactable = e.target.closest(".interactable");
+  //   const interacting = interactable !== null;
+
+  //   animateCursor(e, interacting);
+  // };
 
   return (
-    <div className=" h-screen  overflow-hidden" onWheel={handleWheel}>
+    <div
+      className=" h-screen  overflow-hidden"
+      onWheel={handleWheel}
+      // onMouseMove={handleMouseMove}
+    >
+      {/* <div className="cursor-style" ref={cursorRef} /> */}
+      <Cursor />
       <AnimatePresence mode="wait">{isLoading && <Loader />}</AnimatePresence>
-      <NavBar
-        shouldAnimate={shouldAnimate}
-        shouldNotAnimate={shouldNotAnimate}
-        ButtonClicked={ButtonClicked}
-      />
-      <AnimatePresence mode="wait">
-        {navAnimate && <SecondNav handleNavigation={handleNavigation} />}
-      </AnimatePresence>
-      <Home
-        currentFragment={currentFragment}
-        visitedFragments={visitedFragments.includes("Home")}
-      />
+      <div id="your-container-class" className="your-container-class">
+        <NavBar
+          shouldAnimate={shouldAnimate}
+          shouldNotAnimate={shouldNotAnimate}
+          ButtonClicked={ButtonClicked}
+        />
+        <AnimatePresence mode="wait">
+          {navAnimate && <SecondNav handleNavigation={handleNavigation} />}
+        </AnimatePresence>
+        <Home
+          currentFragment={currentFragment}
+          visitedFragments={visitedFragments.includes("Home")}
+        />
 
-      <Projects
-        currentFragment={currentFragment}
-        visitedFragments={visitedFragments.includes("Projects")}
-      />
+        <Projects
+          currentFragment={currentFragment}
+          visitedFragments={visitedFragments.includes("Projects")}
+        />
 
-      <About
-        currentFragment={currentFragment}
-        visitedFragments={visitedFragments.includes("About-Me")}
-      />
+        <About
+          currentFragment={currentFragment}
+          visitedFragments={visitedFragments.includes("About-Me")}
+        />
 
-      <Contact
-        currentFragment={currentFragment}
-        visitedFragments={visitedFragments.includes("Contact-Me")}
-      />
+        <Contact
+          currentFragment={currentFragment}
+          visitedFragments={visitedFragments.includes("Contact-Me")}
+        />
+      </div>
       {/*
       <Testing
         currentFragment={currentFragment}

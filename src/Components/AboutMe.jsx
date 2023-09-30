@@ -1,25 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Typed from "typed.js";
-import WorkImage from "../Assests/svg/work.svg";
 
 function AboutMe({ shouldAnimate, finalY }) {
-  const typedElementRef = useRef(null);
-
-  useEffect(() => {
-    const options = {
-      strings: ["Reactjs", "Framer Motion", "Tailwind Css", "Sass"],
-      typeSpeed: 50,
-      loop: true,
-    };
-
-    const typed = new Typed(typedElementRef.current, options);
-
-    return () => {
-      typed.destroy(); // Cleanup the Typed instance on unmount
-    };
-  }, []);
-
   return (
     <motion.div
       className="h-screen w-screen overflow-hidden "
@@ -33,57 +14,53 @@ function AboutMe({ shouldAnimate, finalY }) {
       }}
       transition={{ duration: 1, delay: 1.5 }}
     >
-      <motion.div
-        whileTap={{
-          scale: 0.95,
-        }}
-      >
-        <motion.img
-          initial={{ opacity: 0, y: 10 }}
-          animate={{
-            opacity: shouldAnimate ? 1 : 0,
-            y: shouldAnimate ? 0 : 10,
-          }}
-          transition={{ delay: 0.9 }}
-          src={WorkImage}
-          alt="work"
-          className=" hidden lg:block w-[45vw] h-[70vh] absolute  right-5 top-[100px]"
+      <motion.div className="blur" />
+      <motion.section>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: shouldAnimate ? 1 : 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
+          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[56vmin] h-[17vmin] bg-gradient-to-b from-purple-500 via-purple-500 to-pink-500  rounded-t-full rounded-b-full"
         />
-      </motion.div>
-      <div className="flex flex-col mt-[5vh] h-[95vh] lg:w-[55vw] border-2 border-red-600">
-        <div className="border-2 border-[blue] h-[40vh]">
-          <motion.h1 className="text-white text-[3em] text-center mt-[3%]">
-            About Me
-          </motion.h1>
-          <div className="flex w-full border-2 border-[green] items-center justify-center">
-            <h1
-              className="text-white "
-              style={{ fontSize: "clamp(23px,3vw,34px)" }}
-            >
-              My main skills are {""}
-            </h1>
-            <span
-              className="text-white "
-              style={{ fontSize: "clamp(25px,4vw,34px)" }}
-              ref={typedElementRef}
-            >
-              {""}
-            </span>
-          </div>
+        <div className="hidden lg:flex  w-full fixed items-center justify-between top-1/2 -translate-y-1/2">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: shouldAnimate ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
+            className="w-[15vmin] h-[66vmin] bg-gradient-to-b from-purple-500 via-purple-500 to-pink-500  rounded-t-full rounded-b-full"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: shouldAnimate ? 1 : 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
+            className=" lg:inline w-[15vmin] h-[56vmin] bg-gradient-to-b from-purple-500 via-purple-500 to-pink-500  rounded-t-full rounded-b-full"
+          />
         </div>
-        <div className=" h-[60vh] ">
-          <p className="text-white text-clamp1 md:text-clamp2 lg:text-clamp1 text-center ">
-            As a front-end developer, I dive into the realm where technology and
-            art converge. With every line of code, I sculpt immersive
-            experiences that bridge innovation with aesthetics. I'm driven by a
-            passion to create digital landscapes that tell stories, evoke
-            emotions, and forge connections. My work harmonizes functionality
-            and beauty, crafting interfaces that are not just seamless, but
-            profoundly captivating. Join me in reshaping the digital frontier,
-            where every pixel and interaction is a stroke of genius.
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: shouldAnimate ? 1 : 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
+          className="flex flex-col mt-[-35px] md:mt-0 z-[60] justify-center w-full md:w-[80vw] lg:w-[50vw] h-screen absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  "
+        >
+          <h1 className="text-3xl neon-text md:text-7xl lg:text-6xl z-[60] text-white text-center ">
+            Choosing to not choose is equally important too{""}
+          </h1>
+          <p className="mt-10 mb-7 mx-5 text-white text-lg md:text-3xl lg:text-lg ">
+            {" "}
+            I am an enthusiastic web designer with a passion for aesthetics and
+            a commitment to continuous growth. My journey in the world of web
+            development has been driven by a desire to create visually stunning
+            and user-friendly websites. With each project, I strive to push my
+            creative boundaries, delivering top-notch services, and learning
+            something new along the way. Join me on this exciting journey as I
+            evolve and explore the endless possibilities of web design.
           </p>
-        </div>
-      </div>
+        </motion.section>
+      </motion.section>
     </motion.div>
   );
 }
