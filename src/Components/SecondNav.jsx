@@ -53,7 +53,7 @@ const SecondNav = ({ handleNavigation }) => {
         </motion.section>
       </section>
       <div className="absolute top-0 left-0  h-screen w-full flex flex-col lg:flex-row-reverse justify-evenly ">
-        <div className="lg:absolute w-full  lg:w-auto h-[60vh] mt-[10vh]  lg:mt-0  lg:top-[15%] right-0 lg:right-[15%] flex  items-center justify-center  ">
+        <div className="lg:absolute w-full  lg:w-auto h-[50vh] lg:h-auto  mt-[10vh]  lg:mt-0  lg:top-[15%] right-0 lg:right-[15%] flex  items-center justify-center  ">
           <motion.div className="flex flex-col  " variants={container2}>
             <motion.h1
               className="text-[#06061C]  text-[2.5em] md:text-[4em] lg:text-[2.5em]  font-semibold pb-[20px] lg:pb-[40px] tracking-[0.2rem] md:tracking-[0.5rem] mt-6 mx-6 "
@@ -77,27 +77,27 @@ const SecondNav = ({ handleNavigation }) => {
           </motion.div>
         </div>
 
-        <section className="relative lg:absolute lg:top-0 left-0 lg:left-[10%] flex flex-col  w-full lg:w-auto h-[30vh] lg:h-screen justify-evenly items-center">
+        <section className="relative lg:absolute lg:top-0 left-0 lg:left-[10%] flex flex-col  w-full lg:w-auto h-[40vh] lg:h-screen justify-evenly items-center">
           <motion.div
             className="flex flex-col items-center justify-evenly relative top-[-20px]"
             variants={navAnimation}
           >
-            <h1 className="text-[2em] md:text-[3.5em] lg:text-[2em] text-[#06061C]  text-center font-semibold  md:tracking-widest ">
+            <h1 className="text-[2em] md:text-[3.5em] lg:text-[2em] text-[#06061C]  text-center font-semibold  md:tracking-widest pb-5">
               Skills
             </h1>
-            <div className="flex relative items-center justify-center ">
+            <div className="flex relative items-center justify-center gap-9">
               {SkillIcons.map((item) => (
                 <img
                   src={item.icon}
                   key={item.id}
-                  className="h-[30px] w-[30px] mr-[30px]  md:h-[80px] md:w-[80px] md:p-[20px]"
+                  className="h-[30px] w-[30px]  md:h-[80px] md:w-[80px] md:p-[20px]"
                 />
               ))}
             </div>
           </motion.div>
 
           <motion.div className="flex flex-col " variants={navAnimation}>
-            <h1 className="text-[2em] md:text-[3.5em] lg:text-[2em] text-[#06061C]  text-center font-semibold  md:tracking-widest ">
+            <h1 className="text-[2em] md:text-[3.5em] lg:text-[2em] text-[#06061C]  text-center font-semibold  md:tracking-widest pb-5">
               Social Contacts
             </h1>
             <div className="flex relative items-center justify-center ">
