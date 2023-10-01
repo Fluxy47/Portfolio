@@ -49,16 +49,6 @@ function AboutMe({ shouldAnimate, finalY }) {
           <h1 className="text-3xl neon-text md:text-7xl lg:text-6xl z-[60]  text-white text-center mt-[20px] md:mt-0">
             Choosing to not choose is equally important too{""}
           </h1>
-          <p className="mt-10 mb-7 mx-5 text-white text-lg md:text-3xl lg:text-lg ">
-            {" "}
-            I am an enthusiastic web designer with a passion for aesthetics and
-            a commitment to continuous growth. My journey in the world of web
-            development has been driven by a desire to create visually stunning
-            and user-friendly websites. With each project, I strive to push my
-            creative boundaries, delivering top-notch services, and learning
-            something new along the way. Join me on this exciting journey as I
-            evolve and explore the endless possibilities of web design.
-          </p>
         </motion.section>
       </motion.section>
     </motion.div>
