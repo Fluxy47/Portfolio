@@ -196,8 +196,6 @@ input:valid ~ label {
   margin: 0;
   padding: 0;
   color: "#202020";
-  width: 15rem;
-  height: 3rem;
   border: none;
   outline: none;
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
@@ -1014,10 +1012,10 @@ main:nth-child(9) {
   }
 }
 
-.card:hover:not(.active) .btn2 {
+/* .card:hover:not(.active) .btn2 {
   opacity: 1;
   visibility: visible;
-}
+} */
 
 /* Show the button on the selected card without hover */
 .card.active .btn2 {

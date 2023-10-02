@@ -43,13 +43,9 @@ function App() {
     }, 1500);
   };
 
-  const shouldNotAnimate = () => {
-    setNavAnimate(false);
-    setButtonClicked(false);
-  };
   const shouldAnimate = () => {
-    setNavAnimate(true);
-    setButtonClicked(true);
+    setNavAnimate((prevstate) => !prevstate);
+    setButtonClicked((prevstate) => !prevstate);
   };
 
   const fragments = useMemo(
@@ -228,11 +224,7 @@ function App() {
       <Cursor />
       <AnimatePresence mode="wait">{isLoading && <Loader />}</AnimatePresence>
       <div id="your-container-class" className="your-container-class">
-        <NavBar
-          shouldAnimate={shouldAnimate}
-          shouldNotAnimate={shouldNotAnimate}
-          ButtonClicked={ButtonClicked}
-        />
+        <NavBar shouldAnimate={shouldAnimate} ButtonClicked={ButtonClicked} />
         <AnimatePresence mode="wait">
           {navAnimate && <SecondNav handleNavigation={handleNavigation} />}
         </AnimatePresence>

@@ -29,7 +29,7 @@ function Card({ item, index, willAnimate, handleClick }) {
           </div>
         </>
       )}
-      {willAnimate === index && (
+      {/* {willAnimate === index && (
         <motion.button
           className={
             willAnimate === index ? "active btn2 fourth" : "btn2 fourth"
@@ -37,7 +37,7 @@ function Card({ item, index, willAnimate, handleClick }) {
         >
           View Project
         </motion.button>
-      )}
+      )} */}
       <div className="flex absolute bottom-0 w-full z-[2]  items-center justify-center ">
         <a href={item.link} target="_blank" rel="noreferrer">
           <motion.button className="btn2 fourth">View Project</motion.button>
