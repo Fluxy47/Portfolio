@@ -9,14 +9,21 @@ import NavBar from "./Components/NavBar";
 import SecondNav from "./Components/SecondNav";
 import Loader from "./Components/Loader";
 import Cursor from "./Components/Cursor";
+import Testing from "./Components/Testing";
 
 function App() {
   const [currentFragment, setCurrentFragment] = useState("");
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [initialSwipeCalculated, setInitialSwipeCalculated] = useState(false);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  // console.log("letssee", initialSwipeCalculated);
   const [renderingInProgress, setRenderingInProgress] = useState(false);
   const [processingScroll, setProcessingScroll] = useState(false);
   const [visitedFragments, setVisitedFragments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ButtonClicked, setButtonClicked] = useState(false);
+  // console.log("buon?", ButtonClicked);
   const [navAnimate, setNavAnimate] = useState(false);
 
   useEffect(() => {
@@ -27,6 +34,7 @@ function App() {
 
   const handleNavigation = (page) => {
     const currentIndex = fragments.indexOf(page);
+    setButtonClicked(false);
 
     if (currentIndex !== -1) {
       const previousFragments = fragments.slice(0, currentIndex + 1);
@@ -55,6 +63,29 @@ function App() {
 
   const INITIAL_FRAGMENT = "Home";
 
+  function navigateFragments(
+    scrollDirection,
+    fragments,
+    currentFragment,
+    setCurrentFragment
+  ) {
+    let newIndex;
+
+    if (scrollDirection === "down") {
+      const currentIndex = fragments.indexOf(currentFragment);
+      newIndex = Math.min(currentIndex + 1, fragments.length - 1);
+    } else if (scrollDirection === "up") {
+      const currentIndex = fragments.indexOf(currentFragment);
+      newIndex = Math.max(currentIndex - 1, 0);
+    }
+
+    if (newIndex !== undefined) {
+      const newFragment = fragments[newIndex];
+      setCurrentFragment(newFragment);
+      window.location.hash = newFragment;
+    }
+  }
+
   const handleWheel = throttle(
     (event) => {
       if (navAnimate || processingScroll) return;
@@ -66,14 +97,24 @@ function App() {
         if ("deltaY" in event) {
           // Scroll wheel event
           scrollDirection = event.deltaY > 0 ? "down" : "up";
-        } else if (event.touches) {
-          // Touch event
-          const touchEndY = event.touches[0].clientY;
-          const touchDirection = touchEndY > touchStartY ? "down" : "up";
-          if (Math.abs(touchEndY - touchStartY) > 50) {
-            scrollDirection = touchDirection;
-          }
-        } else if (event.key) {
+        }
+        //else if (event.touches) {
+        //   // Touch event
+        //   const deltaY = event.touches[0].clientY - touchStartY;
+
+        //   if (!initialSwipeCalculated) {
+        //     // Calculate the initial swipe direction
+        //     scrollDirection = deltaY > 0 ? "down" : "up";
+        //     console.log(scrollDirection);
+        //     setInitialSwipeCalculated(true); // Set the flag to true
+
+        //     // Prevent continuous tracking of touch events
+        //     window.removeEventListener("touchmove", handleTouchMove, {
+        //       passive: false,
+        //     });
+        //   }
+        // }
+        else if (event.key) {
           // Keyboard event
           if (event.key === "ArrowUp") {
             scrollDirection = "up";
@@ -82,21 +123,15 @@ function App() {
           }
         }
 
-        if (scrollDirection === "down") {
-          const currentIndex = fragments.indexOf(currentFragment);
-          const newIndex = Math.min(currentIndex + 1, fragments.length - 1);
-          const newFragment = fragments[newIndex];
-          setCurrentFragment(newFragment);
-          window.location.hash = newFragment;
-        } else if (scrollDirection === "up") {
-          const currentIndex = fragments.indexOf(currentFragment);
-          const newIndex = Math.max(currentIndex - 1, 0);
-          const newFragment = fragments[newIndex];
-          setCurrentFragment(newFragment);
-          window.location.hash = newFragment;
+        if (scrollDirection !== "") {
+          navigateFragments(
+            scrollDirection,
+            fragments,
+            currentFragment,
+            setCurrentFragment
+          );
+          setRenderingInProgress(true);
         }
-
-        setRenderingInProgress(true);
       }
 
       setTimeout(() => {
@@ -108,21 +143,32 @@ function App() {
   );
 
   // Variables to store initial touch position
-  let touchStartY = 0;
 
-  // Add an event listener to track touch start
-  window.addEventListener("touchstart", function (event) {
-    touchStartY = event.touches[0].clientY;
-  });
+  const minSwipeDistance = 50;
 
-  // Add an event listener to track touch move
-  window.addEventListener(
-    "touchmove",
-    function (event) {
-      event.preventDefault(); // Prevent default touch behavior
-    },
-    { passive: false }
-  );
+  const onTouchStart = (e) => {
+    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientY); // Use clientY to get the initial vertical position
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientY); // Use clientY for vertical position
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isUpSwipe = distance > minSwipeDistance;
+    const isDownSwipe = distance < -minSwipeDistance;
+
+    if (isUpSwipe || isDownSwipe) {
+      const scrollDirection = isUpSwipe ? "down" : "up";
+      navigateFragments(
+        scrollDirection,
+        fragments,
+        currentFragment,
+        setCurrentFragment
+      );
+    }
+  };
 
   // Add an event listener to track keyboard input
   window.addEventListener("keydown", function (event) {
@@ -220,7 +266,13 @@ function App() {
     };
   }, [isLoading]);
   return (
-    <div className=" h-screen  overflow-hidden" onWheel={handleWheel}>
+    <div
+      className=" h-screen  overflow-hidden"
+      onWheel={handleWheel}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <Cursor />
       <AnimatePresence mode="wait">{isLoading && <Loader />}</AnimatePresence>
       <div id="your-container-class" className="your-container-class">
@@ -247,6 +299,7 @@ function App() {
           currentFragment={currentFragment}
           visitedFragments={visitedFragments.includes("Contact-Me")}
         />
+        {/* <Testing /> */}
       </div>
     </div>
   );

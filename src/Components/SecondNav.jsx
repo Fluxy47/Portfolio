@@ -53,7 +53,7 @@ const SecondNav = ({ handleNavigation }) => {
         </motion.section>
       </section>
       <section className="absolute top-0 left-0 flex flex-col lg:flex-row-reverse h-screen w-full justify-evenly lg:justify-around items-center ">
-        <motion.div className="flex flex-col mt-[40px]  " variants={container2}>
+        <motion.div className="flex flex-col " variants={container2}>
           <motion.h1
             className="text-[#06061C] text-center text-[2.5em] md:text-[4em] lg:text-[2.5em]  font-semibold pb-[20px] lg:pb-[40px] tracking-[0.2rem] md:tracking-[0.5rem]  mx-6 "
             variants={navAnimation}

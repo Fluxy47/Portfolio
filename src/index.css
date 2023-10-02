@@ -199,11 +199,9 @@ input:valid ~ label {
   border: none;
   outline: none;
   clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-
   font-size: "1em";
   font-weight: 600;
   cursor: none;
-  display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;

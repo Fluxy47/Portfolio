@@ -1,57 +1,36 @@
 import React, { useState } from "react";
 
 function Testing() {
-  const [startX, setStartX] = useState(null);
-  const [startY, setStartY] = useState(null);
-  const [endX, setEndX] = useState(null);
-  const [endY, setEndY] = useState(null);
-  const [direction, setDirection] = useState(null);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
-  const handleTouchStart = (e) => {
-    setStartX(e.touches[0].clientX);
-    setStartY(e.touches[0].clientY);
+  // the required distance between touchStart and touchEnd to be detected as a swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientY); // Use clientY to get the initial vertical position
   };
 
-  const handleTouchMove = (e) => {
-    setEndX(e.touches[0].clientX);
-    setEndY(e.touches[0].clientY);
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientY); // Use clientY for vertical position
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isUpSwipe = distance > minSwipeDistance; // Check if the distance is positive for an up swipe
+    const isDownSwipe = distance < -minSwipeDistance; // Check if the distance is negative for a down swipe
+    if (isUpSwipe || isDownSwipe)
+      console.log("swipe", isUpSwipe ? "up" : "down");
+    // add your conditional logic here
   };
 
-  const handleTouchEnd = () => {
-    const deltaX = endX - startX;
-    const deltaY = endY - startY;
-
-    let swipeDirection = null;
-
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      if (deltaX > 0) {
-        swipeDirection = "right";
-      } else {
-        swipeDirection = "left";
-      }
-    } else {
-      if (deltaY > 0) {
-        swipeDirection = "down";
-      } else {
-        swipeDirection = "up";
-      }
-    }
-
-    setDirection(swipeDirection);
-  };
   return (
-    <div className="bg-black h-screen w-full">
-      {" "}
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        style={{ width: "100px", height: "100px", background: "lightblue" }}
-      >
-        Swipe me
-        <div>Direction: {direction}</div>
-      </div>
-    </div>
+    <div
+      className="bg-black h-screen w-full "
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    ></div>
   );
 }
 
