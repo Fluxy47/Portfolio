@@ -35,10 +35,10 @@ function Contact({ currentFragment, visitedFragments }) {
         zIndex: shouldAnimate ? 10 : 1,
       }}
     >
-      <motion.section className="flex  w-full h-screen bg-divided-image">
+      <motion.section className="flex  w-full h-screen ">
         {customDelays.map((item, index) => (
           <motion.div
-            className="w-[20vw] h-screen  border-none "
+            className="w-[20vw] h-screen  border-none object-contain"
             style={{
               backgroundImage: `url(${contactBackground})`,
               backgroundPosition: `${-index * partWidth * 100}% 0%`,
