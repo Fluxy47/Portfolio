@@ -25,6 +25,12 @@ export const myProjects = [
     id: 2,
     link: "https://my-media-seven.vercel.app",
   },
+  {
+    title: "Coffee-Website",
+    description: "A website for cafes",
+    id: 2,
+    link: "https://coffee-website-one.vercel.app",
+  },
 ];
 
 export const containerVariants = {

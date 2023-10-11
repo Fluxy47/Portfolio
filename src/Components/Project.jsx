@@ -40,15 +40,15 @@ function Project({ finalY, shouldAnimate }) {
     if (screenWidth <= 767) {
       // For mobile devices
       maxPercentage = 0;
-      minPercentage = -170;
+      minPercentage = -250;
     } else if (screenWidth <= 1024) {
       // For tablets
       maxPercentage = 0;
-      minPercentage = -155;
+      minPercentage = -250;
     } else {
       // For larger devices
       maxPercentage = 0;
-      minPercentage = 0;
+      minPercentage = -70;
     }
 
     // Calculate the next percentage position with the restriction
@@ -127,7 +127,7 @@ function Project({ finalY, shouldAnimate }) {
           data-mouse-down-at="0"
           data-prev-percentage="0"
           ref={trackRef}
-          className="flex w-full  gap-7  ml-5 lg:ml-0 lg:justify-evenly "
+          className="flex w-full  gap-7 lg:gap-10 ml-5 lg:ml-10  "
         >
           {myProjects.map((item, index) => (
             <motion.div

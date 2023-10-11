@@ -97,24 +97,7 @@ function App() {
         if ("deltaY" in event) {
           // Scroll wheel event
           scrollDirection = event.deltaY > 0 ? "down" : "up";
-        }
-        //else if (event.touches) {
-        //   // Touch event
-        //   const deltaY = event.touches[0].clientY - touchStartY;
-
-        //   if (!initialSwipeCalculated) {
-        //     // Calculate the initial swipe direction
-        //     scrollDirection = deltaY > 0 ? "down" : "up";
-        //     console.log(scrollDirection);
-        //     setInitialSwipeCalculated(true); // Set the flag to true
-
-        //     // Prevent continuous tracking of touch events
-        //     window.removeEventListener("touchmove", handleTouchMove, {
-        //       passive: false,
-        //     });
-        //   }
-        // }
-        else if (event.key) {
+        } else if (event.key) {
           // Keyboard event
           if (event.key === "ArrowUp") {
             scrollDirection = "up";
