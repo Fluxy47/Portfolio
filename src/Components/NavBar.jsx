@@ -1,19 +1,6 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+
 function NavBar({ shouldAnimate, ButtonClicked }) {
-  const [elementClass, setElementClass] = useState(
-    "MenuBtn w-[15rem] h-[2.5rem] lg:w-[15rem] lg:h-[3rem]"
-  );
-  useEffect(() => {
-    if (!ButtonClicked) {
-      const delay = setTimeout(() => {
-        setElementClass("flex");
-      }, 1000); // Change 1000 to the delay time you desire in milliseconds
-
-      return () => clearTimeout(delay);
-    }
-  }, [ButtonClicked]);
-
   return (
     <motion.nav className="fixed top-[-10] left-0 w-full bg-transparent z-[9999] m-0 p-0 ">
       <motion.div

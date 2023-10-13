@@ -9,22 +9,17 @@ import NavBar from "./Components/NavBar";
 import SecondNav from "./Components/SecondNav";
 import Loader from "./Components/Loader";
 import Cursor from "./Components/Cursor";
-import Testing from "./Components/Testing";
 
 function App() {
+  const [navAnimate, setNavAnimate] = useState(false);
   const [currentFragment, setCurrentFragment] = useState("");
-  const [touchStartY, setTouchStartY] = useState(0);
-  const [initialSwipeCalculated, setInitialSwipeCalculated] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  // console.log("letssee", initialSwipeCalculated);
   const [renderingInProgress, setRenderingInProgress] = useState(false);
   const [processingScroll, setProcessingScroll] = useState(false);
   const [visitedFragments, setVisitedFragments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [ButtonClicked, setButtonClicked] = useState(false);
-  // console.log("buon?", ButtonClicked);
-  const [navAnimate, setNavAnimate] = useState(false);
 
   useEffect(() => {
     if (!window.location.hash) {
@@ -282,7 +277,6 @@ function App() {
           currentFragment={currentFragment}
           visitedFragments={visitedFragments.includes("Contact-Me")}
         />
-        {/* <Testing /> */}
       </div>
     </div>
   );
