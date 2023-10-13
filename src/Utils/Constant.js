@@ -8,10 +8,10 @@ import mui from "../Assests/svg/mui.svg";
 
 export const myProjects = [
   {
-    title: "Mytube",
-    description: "A youtube Clone project.",
+    title: "Coffee-Website",
+    description: "A website for cafes",
     id: 0,
-    link: "https://mytube-silk.vercel.app",
+    link: "https://coffee-website-one.vercel.app",
   },
   {
     title: "Books-Project",
@@ -26,10 +26,10 @@ export const myProjects = [
     link: "https://my-media-seven.vercel.app",
   },
   {
-    title: "Coffee-Website",
-    description: "A website for cafes",
-    id: 2,
-    link: "https://coffee-website-one.vercel.app",
+    title: "Mytube",
+    description: "A youtube Clone project.",
+    id: 3,
+    link: "https://mytube-silk.vercel.app",
   },
 ];
 

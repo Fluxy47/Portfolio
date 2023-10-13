@@ -50,7 +50,7 @@ function AboutMe({ shouldAnimate, finalY }) {
             Choosing to not choose is equally important too{""}
           </h1>
 
-          <p className="mt-10 mb-7 mx-5 text-white text-base md:text-3xl lg:text-lg ">
+          <p className="mt-10 mb-7 mx-5 text-white text-base md:text-3xl lg:text-lg xl:text-xl 2xl:text-2xl">
             {" "}
             I am an enthusiastic web designer with a passion for aesthetics and
             a commitment to continuous growth. My journey in the world of web

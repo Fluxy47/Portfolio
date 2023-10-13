@@ -1,14 +1,30 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 function NavBar({ shouldAnimate, ButtonClicked }) {
+  const [elementClass, setElementClass] = useState(
+    "MenuBtn w-[15rem] h-[2.5rem] lg:w-[15rem] lg:h-[3rem]"
+  );
+  useEffect(() => {
+    if (!ButtonClicked) {
+      const delay = setTimeout(() => {
+        setElementClass("flex");
+      }, 1000); // Change 1000 to the delay time you desire in milliseconds
+
+      return () => clearTimeout(delay);
+    }
+  }, [ButtonClicked]);
+
   return (
     <motion.nav className="fixed top-[-10] left-0 w-full bg-transparent z-[9999] m-0 p-0 ">
-      <div className="flex relative top-[-4px] justify-center items-center ">
+      <motion.div
+        animate={{ opacity: ButtonClicked ? 0 : 1 }}
+        transition={{ delay: 1.3 }}
+        className="flex relative top-[-4px] justify-center items-center "
+      >
         <div className="w-[530px]  lg:w-[530px] h-[6px] bg-gradient-to-l from-[#ff9900] via-[#ff9900] to-transparent relative top-[3px] md:left-[30px] right-[60px] lg:left-0 m-0 p-0" />
         <a className="fixed z-[120] top-0 ">
           <motion.div
-            className={`MenuBtn  w-[15rem] h-[2.5rem] lg:w-[15rem] lg:h-[3rem] ${
-              ButtonClicked ? "hidden lg:flex" : "flex"
-            }`}
+            className="MenuBtn  w-[15rem] h-[2.5rem] lg:w-[15rem] lg:h-[3rem] flex"
             onClick={shouldAnimate}
           >
             <h1 className="text-[1.2em] text-black font-bold">Menu</h1>
@@ -16,7 +32,7 @@ function NavBar({ shouldAnimate, ButtonClicked }) {
         </a>
 
         <div className="w-[530px] h-[6px] bg-gradient-to-r from-[#ff9900] via-[#ff9900] to-transparent relative top-[3px] md:left-[-30px] left-[100px] m-0 p-0" />
-      </div>
+      </motion.div>
     </motion.nav>
   );
 }
