@@ -10,6 +10,9 @@ import SecondNav from "./Components/SecondNav";
 import Loader from "./Components/Loader";
 import Cursor from "./Components/Cursor";
 
+const fragments = ["Home", "Projects", "About-Me", "Contact-Me"];
+
+
 function App() {
   const [navAnimate, setNavAnimate] = useState(false);
   const [currentFragment, setCurrentFragment] = useState("");
@@ -21,11 +24,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [ButtonClicked, setButtonClicked] = useState(false);
 
+
+//set the intitial fragment 
   useEffect(() => {
     if (!window.location.hash) {
       window.location.hash = "Home";
     }
   }, []);
+
 
   const handleNavigation = (page) => {
     const currentIndex = fragments.indexOf(page);
@@ -51,19 +57,57 @@ function App() {
     setButtonClicked((prevstate) => !prevstate);
   };
 
-  const fragments = useMemo(
-    () => ["Home", "Projects", "About-Me", "Contact-Me"],
-    []
+ 
+
+  // const INITIAL_FRAGMENT = "Home";
+
+  
+// scroll | button keys navigation
+  const handleWheel = throttle(
+    (event) => {
+      if (navAnimate || processingScroll) return;
+      setProcessingScroll(true);
+
+      if (!renderingInProgress) {
+        let scrollDirection = "";
+
+      scrollDirection = handleDirection(event);
+
+        if (scrollDirection !== "") {
+          navigateFragments(
+            scrollDirection,
+          
+          );
+          setRenderingInProgress(true);
+        }
+      }
+
+      setTimeout(() => {
+        setProcessingScroll(false);
+      }, 3000);
+    },
+    3000,
+    { leading: true, trailing: false }
   );
 
-  const INITIAL_FRAGMENT = "Home";
+  //calc direction of navigation
+  const handleDirection = (event) => {
+    if ("deltaY" in event) {
+      // Scroll wheel event
+      return event.deltaY > 0 ? "down" : "up";
+    } else if (event.key) {
+      // Keyboard event
+      if (event.key === "ArrowUp") {
+        return "up";
+      } else if (event.key === "ArrowDown") {
+        return "down";
+      }
+    }
+    return "";
+  };
 
-  function navigateFragments(
-    scrollDirection,
-    fragments,
-    currentFragment,
-    setCurrentFragment
-  ) {
+//sets the next fragment for navigation
+  function navigateFragments(scrollDirection) {
     let newIndex;
 
     if (scrollDirection === "down") {
@@ -81,47 +125,7 @@ function App() {
     }
   }
 
-  const handleWheel = throttle(
-    (event) => {
-      if (navAnimate || processingScroll) return;
-      setProcessingScroll(true);
-
-      if (!renderingInProgress) {
-        let scrollDirection = "";
-
-        if ("deltaY" in event) {
-          // Scroll wheel event
-          scrollDirection = event.deltaY > 0 ? "down" : "up";
-        } else if (event.key) {
-          // Keyboard event
-          if (event.key === "ArrowUp") {
-            scrollDirection = "up";
-          } else if (event.key === "ArrowDown") {
-            scrollDirection = "down";
-          }
-        }
-
-        if (scrollDirection !== "") {
-          navigateFragments(
-            scrollDirection,
-            fragments,
-            currentFragment,
-            setCurrentFragment
-          );
-          setRenderingInProgress(true);
-        }
-      }
-
-      setTimeout(() => {
-        setProcessingScroll(false);
-      }, 3000);
-    },
-    3000,
-    { leading: true, trailing: false }
-  );
-
   // Variables to store initial touch position
-
   const minSwipeDistance = 50;
 
   const onTouchStart = (e) => {
@@ -141,9 +145,7 @@ function App() {
       const scrollDirection = isUpSwipe ? "down" : "up";
       navigateFragments(
         scrollDirection,
-        fragments,
-        currentFragment,
-        setCurrentFragment
+        
       );
     }
   };
@@ -169,7 +171,7 @@ function App() {
   useEffect(() => {
     const handleFragmentChange = () => {
       const fragment = window.location.hash.substr(1); // Get the URL fragment without the '#'
-      setCurrentFragment(fragment);
+       setCurrentFragment(fragment);
 
       const currentIndex = visitedFragments.indexOf(fragment);
       const index = fragments.indexOf(currentFragment);
@@ -204,31 +206,15 @@ function App() {
     window.addEventListener("hashchange", handleFragmentChange);
 
     if (isFirstLoad()) {
-      const initialFragment = INITIAL_FRAGMENT;
-      setCurrentFragment(initialFragment);
-      window.location.hash = initialFragment;
-      setVisitedFragments([initialFragment]);
       localStorage.setItem("hasLoaded", "true"); // Store the information that the app has loaded once
     } else {
-      handleFragmentChange(); // Handle fragment changes for subsequent loads
+        handleFragmentChange(); // Handle fragment changes for subsequent loads
     }
     // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("hashchange", handleFragmentChange);
     };
   }, [visitedFragments, fragments, currentFragment]);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      setIsLoading(true);
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
 
   useEffect(() => {
     let loadingTimeout;
@@ -243,6 +229,7 @@ function App() {
       clearTimeout(loadingTimeout);
     };
   }, [isLoading]);
+
   return (
     <div
       className=" h-screen  overflow-hidden"
