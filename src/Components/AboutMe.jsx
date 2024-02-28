@@ -49,16 +49,6 @@ function AboutMe({ shouldAnimate, finalY }) {
             Choosing to not choose is equally important too{""}
           </h1>
 
-          {/* <p className="mt-10 mb-7 mx-5 text-white text-[18px] md:text-3xl lg:text-lg xl:text-xl 2xl:text-[46px] absolute">
-            {" "}
-            I am an enthusiastic web designer with a passion for aesthetics and
-            a commitment to continuous growth. My journey in the world of web
-            development has been driven by a desire to create visually stunning
-            and user-friendly websites. With each project, I strive to push my
-            creative boundaries, delivering top-notch services, and learning
-            something new along the way. Join me on this exciting journey as I
-            evolve and explore the endless possibilities of web design.
-          </p> */}
           <h2
             style={{
               fontSize: "clamp(1.125rem, 0.8434rem + 1.3253vw, 2.5rem)",
