@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 function AboutMe({ shouldAnimate, finalY }) {
+  console.log(window.innerWidth);
   return (
     <motion.div
       className="h-screen w-screen overflow-hidden "
@@ -12,8 +13,7 @@ function AboutMe({ shouldAnimate, finalY }) {
       animate={{
         y: finalY,
       }}
-      transition={{ duration: 1, delay: 1.5 }}
-    >
+      transition={{ duration: 1, delay: 1.5 }}>
       <motion.div className="blur" />
       <motion.section>
         <motion.div
@@ -44,13 +44,12 @@ function AboutMe({ shouldAnimate, finalY }) {
           animate={{ opacity: shouldAnimate ? 1 : 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1, delay: shouldAnimate ? 3 : 0 }}
-          className="flex flex-col  z-[60]  w-full md:w-[80vw] lg:w-[50vw] h-[90vh] mt-[10vh] md:mt-[15vh]  absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  "
-        >
+          className="flex flex-col  z-[60]  w-full md:w-[80vw] lg:w-[50vw] h-[90vh] mt-[10vh] md:mt-[15vh] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  ">
           <h1 className="text-3xl neon-text md:text-7xl lg:text-6xl z-[60]  text-white text-center mt-[20px] md:mt-0">
             Choosing to not choose is equally important too{""}
           </h1>
 
-          <p className="mt-10 mb-7 mx-5 text-white text-base md:text-3xl lg:text-lg xl:text-xl 2xl:text-2xl">
+          {/* <p className="mt-10 mb-7 mx-5 text-white text-[18px] md:text-3xl lg:text-lg xl:text-xl 2xl:text-[46px] absolute">
             {" "}
             I am an enthusiastic web designer with a passion for aesthetics and
             a commitment to continuous growth. My journey in the world of web
@@ -59,7 +58,20 @@ function AboutMe({ shouldAnimate, finalY }) {
             creative boundaries, delivering top-notch services, and learning
             something new along the way. Join me on this exciting journey as I
             evolve and explore the endless possibilities of web design.
-          </p>
+          </p> */}
+          <h2
+            style={{
+              fontSize: "clamp(1.125rem, 0.8434rem + 1.3253vw, 2.5rem)",
+            }}
+            className="   text-white mt-10 mb-7 mx-5 tracking-tight leading-tight">
+            I am an enthusiastic web designer with a passion for aesthetics and
+            a commitment to continuous growth. My journey in the world of web
+            development has been driven by a desire to create visually stunning
+            and user-friendly websites. With each project, I strive to push my
+            creative boundaries, delivering top-notch services, and learning
+            something new along the way. Join me on this exciting journey as I
+            evolve and explore the endless possibilities of web design.
+          </h2>
         </motion.section>
       </motion.section>
     </motion.div>

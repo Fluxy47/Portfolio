@@ -5,10 +5,9 @@ function Card({ item, index, willAnimate, handleClick }) {
   return (
     <div
       onClick={() => handleClick(index)}
-      className={`w-[80vw] h-[50vh] lg:w-[430px] card ${
+      className={`w-full h-[50vh]   card ${
         index === willAnimate ? "active" : ""
-      }`}
-    >
+      }`}>
       {willAnimate != null && (
         <>
           <div className="card-title">

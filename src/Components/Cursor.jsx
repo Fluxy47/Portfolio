@@ -81,6 +81,7 @@ function Cursor() {
     // Position the dot
     endX = e.pageX;
     endY = e.pageY;
+    // cursorDot.current.style.transform = `translate(${endX}px, ${endY}px)`;
     cursorDot.current.style.top = endY + "px";
     cursorDot.current.style.left = endX + "px";
   }
